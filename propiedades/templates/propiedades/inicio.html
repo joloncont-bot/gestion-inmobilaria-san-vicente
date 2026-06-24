@@ -1,0 +1,188 @@
+{% extends 'propiedades/base.html' %}
+
+{% block contenido %}
+
+<section class="hero">
+
+    <div class="container">
+
+        <h1 style="font-size:48px;">
+            Gestión Inmobiliaria
+            <br>
+            <span>San Vicente</span>
+        </h1>
+
+        <p class="mt-3 lead">
+            Compra, venta y arriendo de propiedades en San Vicente de Tagua Tagua y alrededores.
+        </p>
+
+        <div class="mt-4 datos-hero">
+            
+        </div>
+            <h5 class="text-danger">
+                Pilar Caroca Gutiérrez
+            </h5>
+
+            <p class="mb-2">
+                <strong>Representante Legal</strong>
+            </p>
+
+            <p class="mb-2">
+                📍 Germán Riesco 524, San Vicente de Tagua Tagua
+            </p>
+
+            <p class="mb-2">
+                📞 (72) 2571086
+            </p>
+
+            <p class="mb-2">
+                📱 +56 9 9039 1949
+            </p>
+
+            <p class="mb-2">
+                ✉️ gestioninmobiliariasanvicente@gmail.com
+            </p>
+
+            <p class="mb-0">
+                🌐 www.gestioninmobiliariasanvicente.cl
+            </p>
+
+        </div>
+
+        <div class="mt-4">
+
+            <a href="/propiedades/" class="btn-rojo me-3">
+                Ver Propiedades
+            </a>
+
+            <a href="/contacto/" class="btn btn-outline-dark">
+                Contáctanos
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="container mt-5">
+    <h2 class="titulo-seccion">Nuestros Servicios</h2>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card servicio-card shadow">
+                <div class="icono-servicio">🏠</div>
+                <h5>Venta de Propiedades</h5>
+                <p>Asesoría completa para la venta de inmuebles.</p>
+                <a href="/contacto/" class="btn btn-outline-danger">Más información</a>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card servicio-card shadow">
+                <div class="icono-servicio">🔑</div>
+                <h5>Arriendos</h5>
+                <p>Gestión de arriendos y administración de propiedades.</p>
+                <a href="/contacto/" class="btn btn-outline-danger">Más información</a>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card servicio-card shadow">
+                <div class="icono-servicio">📋</div>
+                <h5>Tasaciones</h5>
+                <p>Evaluación profesional del valor comercial de su propiedad.</p>
+                <a href="/contacto/" class="btn btn-outline-danger">Más información</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% load formato %}
+
+<section class="container mt-5">
+    <h2 class="titulo-seccion">Propiedades Destacadas</h2>
+
+    <div class="row">
+
+        {% for propiedad in destacadas %}
+
+        <div class="col-md-3 mb-4">
+            <div class="card-propiedad">
+
+                <span class="estado {{ propiedad.estado|lower }}">
+                    {{ propiedad.estado|upper }}
+                </span>
+
+                {% if propiedad.imagen_principal %}
+                    <img src="{{ propiedad.imagen_principal.url }}" class="card-img-top">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5>{{ propiedad.titulo }}</h5>
+                    <p>{{ propiedad.comuna }}</p>
+
+                    <p class="precio">
+                        ${{ propiedad.precio|precio_chileno }}
+                    </p>
+
+                    <p>
+                        {{ propiedad.dormitorios }} Dorm. ·
+                        {{ propiedad.banos }} Baños ·
+                        {{ propiedad.metros_cuadrados }} m²
+                    </p>
+
+                    <a href="{% url 'detalle' propiedad.id %}"
+                       class="btn btn-outline-danger w-100">
+                        Ver detalle
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+
+        <p class="text-center">
+            No hay propiedades destacadas por el momento.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="text-center">
+        <a href="/propiedades/" class="btn-rojo">
+            Ver todas las propiedades
+        </a>
+    </div>
+</section>
+<section class="contacto-box mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Contacto</h4>
+                <p>📍 Avenida Germán Riesco N°524, San Vicente de Tagua Tagua</p>
+                <p>📞 990 391 949 / 961 889 439</p>
+                <p>✉️ gestioninmobiliariasanvicente@gmail.com</p>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Envíanos un mensaje</h4>
+                <input class="form-control mb-2" placeholder="Nombre">
+                <input class="form-control mb-2" placeholder="Correo electrónico">
+                <input class="form-control mb-2" placeholder="Teléfono">
+                <textarea class="form-control mb-2" placeholder="Mensaje"></textarea>
+                <button class="btn-rojo border-0">Enviar mensaje</button>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Síguenos</h4>
+                <p>Facebook: Gestión Inmobiliaria San Vicente</p>
+                <a href="https://wa.me/56990391949" class="btn btn-success">+56 990 391 949</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

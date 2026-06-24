@@ -1,0 +1,114 @@
+{% extends 'propiedades/base.html' %}
+{% load formato %}
+{% block contenido %}
+
+<div class="container mt-5">
+
+    <h1 class="titulo-seccion">Propiedades disponibles</h1>
+
+    <div class="card shadow p-4 mb-5">
+        <form method="GET">
+            <div class="row">
+
+                <div class="col-md-3 mb-3">
+                    <input type="text" name="buscar" class="form-control"
+                           placeholder="Buscar por código, comuna o dirección"
+                           value="{{ request.GET.buscar }}">
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <select name="operacion" class="form-control">
+                        <option value="">Venta / Arriendo</option>
+                        <option value="Venta" {% if request.GET.operacion == "Venta" %}selected{% endif %}>Venta</option>
+                        <option value="Arriendo" {% if request.GET.operacion == "Arriendo" %}selected{% endif %}>Arriendo</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <input type="text" name="comuna" class="form-control"
+                           placeholder="Comuna"
+                           value="{{ request.GET.comuna }}">
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <select name="dormitorios" class="form-control">
+                        <option value="">Dormitorios</option>
+                        <option value="1" {% if request.GET.dormitorios == "1" %}selected{% endif %}>1 dormitorio</option>
+                        <option value="2" {% if request.GET.dormitorios == "2" %}selected{% endif %}>2 dormitorios</option>
+                        <option value="3" {% if request.GET.dormitorios == "3" %}selected{% endif %}>3 dormitorios</option>
+                        <option value="4" {% if request.GET.dormitorios == "4" %}selected{% endif %}>4 dormitorios</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <input type="text" name="precio_max" class="form-control"
+                           placeholder="Precio máximo"
+                           value="{{ request.GET.precio_max }}">
+                </div>
+
+                <div class="col-md-1 mb-3">
+                    <button class="btn btn-danger w-100">Buscar</button>
+                </div>
+
+            </div>
+        </form>
+
+        <a href="/propiedades/" class="btn btn-outline-secondary mt-2">
+            Limpiar filtros
+        </a>
+    </div>
+
+    <div class="row">
+
+        {% for propiedad in propiedades %}
+
+        <div class="col-md-4 mb-4">
+            <div class="card-propiedad">
+
+                <span class="estado {{ propiedad.estado|lower }}">
+                    {{ propiedad.estado|upper }}
+                </span>
+
+                {% if propiedad.imagen_principal %}
+                    <img src="{{ propiedad.imagen_principal.url }}" class="card-img-top">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6" class="card-img-top">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5>{{ propiedad.titulo }}</h5>
+                    <p>{{ propiedad.comuna }}</p>
+
+                    <p class="precio">
+                        ${{ propiedad.precio|precio_chileno }}
+                    </p>
+
+                    <p>
+                        {{ propiedad.dormitorios }} Dorm. ·
+                        {{ propiedad.banos }} Baños ·
+                        {{ propiedad.metros_cuadrados }} m²
+                    </p>
+
+                    <a href="{% url 'detalle' propiedad.id %}"
+                       class="btn btn-outline-danger w-100">
+                        Ver detalle
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+
+        <div class="text-center">
+            <h4>No se encontraron propiedades.</h4>
+            <p>Intenta cambiar los filtros de búsqueda.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

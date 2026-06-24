@@ -1,0 +1,603 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>
+        {% block titulo %}
+            Gestión Inmobiliaria San Vicente
+        {% endblock %}
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            background: linear-gradient(180deg, #dff4ff, #eef9ff);
+            color: #10162f;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+
+        .datos-hero {
+            max-width: 700px;
+            background: transparent;
+            box-shadow: none;
+            border: none;
+            padding: 0;
+        }
+
+        .datos-hero p {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .datos-hero h5 {
+            font-weight: bold;
+            color: #9b111e;
+        }
+
+        /* MENÚ */
+
+        .menu-principal {
+            position: relative;
+            z-index: 1000;
+            padding: 14px 0;
+            border-top: 6px solid #9b111e;
+            background: #ffffff;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo-navbar {
+            width: auto;
+            height: 65px;
+            margin-right: 12px;
+            object-fit: contain;
+        }
+
+        .logo-texto {
+            color: #111111;
+            font-size: 21px;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .logo-texto span {
+            color: #9b111e;
+            font-weight: 600;
+        }
+
+        .nav-link {
+            margin-left: 16px;
+            padding: 9px 4px !important;
+            color: #111111 !important;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus {
+            color: #9b111e !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(155, 17, 30, 0.35);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(155, 17, 30, 0.15);
+        }
+
+        /* PORTADA DEL INICIO */
+
+        .hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(223, 244, 255, 0.97) 0%,
+                    rgba(223, 244, 255, 0.86) 35%,
+                    rgba(223, 244, 255, 0.35) 60%,
+                    rgba(223, 244, 255, 0.08) 100%
+                ),
+                url("{% static 'propiedades/img/casa_logo.jpg' %}");
+
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            margin-bottom: 20px;
+            font-size: 58px;
+            font-weight: 800;
+            line-height: 1.05;
+        }
+
+        .hero h1 span {
+            color: #9b111e;
+        }
+
+        .hero p {
+            max-width: 760px;
+        }
+
+        /* BOTONES */
+
+        .btn-rojo {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 1px solid #9b111e;
+            border-radius: 7px;
+            background: #9b111e;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            transition:
+                background-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .btn-rojo:hover {
+            border-color: #760c16;
+            background: #760c16;
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* TÍTULOS */
+
+        .titulo-seccion {
+            margin-bottom: 35px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .titulo-seccion::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 4px;
+            margin: 12px auto 0;
+            border-radius: 5px;
+            background: #9b111e;
+        }
+
+        /* SERVICIOS */
+
+        .servicio-card {
+            height: 100%;
+            padding: 28px;
+            border: none;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+        }
+
+        .icono-servicio {
+            margin-bottom: 12px;
+            font-size: 50px;
+        }
+
+        /* PROPIEDADES */
+
+        .card-propiedad {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            border: none;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .card-propiedad:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+        }
+
+        .card-propiedad img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .card-propiedad .card-body {
+            padding: 18px;
+        }
+
+        .estado {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 6px 10px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .disponible {
+            background: #198754;
+        }
+
+        .vendida {
+            background: #dc3545;
+        }
+
+        .arrendada {
+            background: #0d6efd;
+        }
+
+        .reservada {
+            background: #fd7e14;
+        }
+
+        .precio {
+            color: #9b111e;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* CARRUSEL */
+
+        .carousel {
+            overflow: hidden;
+            border-radius: 14px;
+            background: #e9ecef;
+        }
+
+        .imagen-carrusel {
+            width: 100%;
+            height: 430px;
+            object-fit: cover;
+        }
+
+        .carousel-item {
+            transition: transform 0.65s ease-in-out;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            padding: 22px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.65);
+            background-size: 55%;
+        }
+
+        .carousel-indicators [data-bs-target] {
+            background-color: #9b111e;
+        }
+
+        /* CONTACTO */
+
+        .contacto-box {
+            padding: 45px 0;
+            background: #cceeff;
+        }
+
+        /* WHATSAPP */
+
+        .whatsapp {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            z-index: 1100;
+            padding: 14px 20px;
+            border-radius: 50px;
+            background: #25d366;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+            transition:
+                transform 0.2s ease,
+                background-color 0.2s ease;
+        }
+
+        .whatsapp:hover {
+            background: #1eaf54;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            width: 100%;
+            padding: 18px;
+            background: #9b111e;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* TABLET */
+
+        @media (max-width: 991px) {
+            .menu-principal {
+                padding: 10px 0;
+            }
+
+            .logo-navbar {
+                height: 52px;
+            }
+
+            .logo-texto {
+                font-size: 16px;
+            }
+
+            .navbar-collapse {
+                margin-top: 10px;
+            }
+
+            .navbar-nav {
+                padding: 12px 16px;
+                border-radius: 10px;
+                background: #ffffff;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            }
+
+            .nav-link {
+                margin-left: 0;
+                padding: 11px 4px !important;
+                border-bottom: 1px solid #eeeeee;
+            }
+
+            .navbar-nav .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .hero {
+                min-height: 430px;
+                text-align: center;
+
+                background-image:
+                    linear-gradient(
+                        rgba(223, 244, 255, 0.86),
+                        rgba(223, 244, 255, 0.86)
+                    ),
+                    url("{% static 'propiedades/img/casa_logo.jpg' %}");
+
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+            .hero h1 {
+                margin-right: auto;
+                margin-left: auto;
+                font-size: 38px;
+            }
+
+            .hero p {
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            .hero .btn,
+            .hero .btn-rojo {
+                margin-bottom: 10px;
+            }
+
+            .imagen-carrusel {
+                height: 320px;
+            }
+
+            .card-propiedad img {
+                height: 230px;
+            }
+
+            .whatsapp {
+                right: 15px;
+                bottom: 15px;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+
+            .footer {
+                padding: 15px;
+                font-size: 14px;
+            }
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 576px) {
+            .container {
+                padding-right: 18px;
+                padding-left: 18px;
+            }
+
+            .navbar-brand {
+                max-width: calc(100% - 60px);
+            }
+
+            .logo-navbar {
+                height: 44px;
+                margin-right: 8px;
+            }
+
+            .logo-texto {
+                overflow: hidden;
+                max-width: 190px;
+                font-size: 14px;
+                white-space: normal;
+            }
+
+            .hero {
+                min-height: 400px;
+                padding: 45px 0;
+
+                background-image:
+                    linear-gradient(
+                        rgba(223, 244, 255, 0.84),
+                        rgba(223, 244, 255, 0.84)
+                    ),
+                    url("{% static 'propiedades/img/casa_logo.jpg' %}");
+
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+            .hero h1 {
+                font-size: 31px;
+            }
+
+            .hero h4 {
+                font-size: 18px;
+            }
+
+            .hero .btn,
+            .hero .btn-rojo {
+                display: block;
+                width: 100%;
+                margin-right: 0 !important;
+                margin-bottom: 10px;
+            }
+
+            .titulo-seccion {
+                font-size: 26px;
+            }
+
+            .imagen-carrusel {
+                height: 240px;
+            }
+
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                padding: 17px;
+            }
+
+            .card-propiedad {
+                margin-bottom: 18px;
+            }
+
+            .card-propiedad img {
+                height: 210px;
+            }
+
+            .contacto-box {
+                padding: 30px 0;
+            }
+
+            .whatsapp {
+                right: 12px;
+                bottom: 12px;
+                padding: 11px 14px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg menu-principal">
+    <div class="container">
+
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img
+                src="{% static 'propiedades/img/logo.png' %}"
+                alt="Logo de Gestión Inmobiliaria San Vicente"
+                class="logo-navbar">
+
+            <div class="logo-texto">
+                <strong>Gestión Inmobiliaria</strong><br>
+                <span>San Vicente</span>
+            </div>
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuPrincipal"
+            aria-controls="menuPrincipal"
+            aria-expanded="false"
+            aria-label="Abrir menú">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+            class="collapse navbar-collapse"
+            id="menuPrincipal">
+
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">Inicio</a>
+                <a class="nav-link" href="/quienes-somos/">Quiénes Somos</a>
+                <a class="nav-link" href="/servicios/">Servicios</a>
+                <a class="nav-link" href="/propiedades/">Propiedades</a>
+                <a class="nav-link" href="/contacto/">Contacto</a>
+                <a class="nav-link" href="/admin/">Administrador</a>
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<main>
+    {% block contenido %}
+    {% endblock %}
+</main>
+
+<a
+    href="https://wa.me/56990391949"
+    class="whatsapp"
+    target="_blank"
+    rel="noopener noreferrer">
+
+    WhatsApp
+</a>
+
+<footer class="footer">
+    © 2026 Gestión Inmobiliaria San Vicente -
+    Corretaje de Propiedades.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

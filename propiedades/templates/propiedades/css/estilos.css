@@ -1,0 +1,138 @@
+body {
+    background: #dff3ff;
+    color: #0b132b;
+    font-family: Arial, sans-serif;
+}
+
+.menu-principal {
+    background: white;
+    border-top: 5px solid #9b111e;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand span {
+    color: #9b111e;
+}
+
+.nav-link {
+    color: #111 !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #9b111e !important;
+}
+
+.hero {
+    padding: 80px 0;
+    background: linear-gradient(90deg, #dff3ff 45%, rgba(223,243,255,0.6)), 
+    url("https://images.unsplash.com/photo-1568605114967-8130f3a36994");
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h1 {
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.hero span {
+    color: #9b111e;
+}
+
+.btn-rojo {
+    background: #9b111e;
+    color: white;
+    border-radius: 6px;
+    padding: 12px 25px;
+    text-decoration: none;
+}
+
+.btn-rojo:hover {
+    background: #700b14;
+    color: white;
+}
+
+.titulo-seccion {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.titulo-seccion::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: #9b111e;
+    margin: 10px auto;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+.precio {
+    color: #9b111e;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.estado {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 6px 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.disponible { background: #198754; }
+.vendida { background: #6c757d; }
+.arrendada { background: #0d6efd; }
+.reservada { background: #fd7e14; }
+
+.servicio-card {
+    text-align: center;
+    padding: 25px;
+    min-height: 230px;
+}
+
+.icono-servicio {
+    font-size: 45px;
+    color: #9b111e;
+}
+
+.contacto-box {
+    background: #ccecff;
+    padding: 40px 0;
+}
+
+.whatsapp {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #25d366;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+.footer {
+    background: #9b111e;
+    color: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 0;
+}

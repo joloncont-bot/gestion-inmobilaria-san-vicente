@@ -1,0 +1,29 @@
+{% extends 'propiedades/base.html' %}
+
+{% block contenido %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Contacto</h1>
+
+    <div class="row">
+        <div class="col-md-5">
+            <h3>Pilar Caroca</h3>
+            <p>Corredora de propiedades dedicada a la venta y arriendo de inmuebles.</p>
+            <p><strong>Correo:</strong> gestioninmobiliariasanvicente@gmail.com</p>
+            <p><strong>Teléfono:</strong> +56990391949</p>
+            <p><strong>Ubicación:</strong> German Riesco Errazuriz 524, San Vicente de Tagua Tagua, Chile</p>
+        </div>
+
+        <div class="col-md-7">
+            <form>
+                <input class="form-control mb-3" type="text" placeholder="Nombre completo">
+                <input class="form-control mb-3" type="email" placeholder="Correo electrónico">
+                <input class="form-control mb-3" type="text" placeholder="Teléfono">
+                <textarea class="form-control mb-3" rows="5" placeholder="Mensaje"></textarea>
+                <button class="btn btn-dark w-100">Enviar mensaje</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
