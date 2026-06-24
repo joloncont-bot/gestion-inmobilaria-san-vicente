@@ -121,7 +121,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'gestion-inmobiliaria-san-vicente.onrender.com',
+    'gestion-inmobilaria-san-vicente.onrender.com',
 ]
 
 STATIC_URL = 'static/'
