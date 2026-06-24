@@ -116,9 +116,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+DEBUG = True
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'gestion-inmobiliaria-san-vicente.onrender.com',
+]
+
 STATIC_URL = 'static/'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
